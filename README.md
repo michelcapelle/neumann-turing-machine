@@ -20,7 +20,7 @@ The API contains 2 LLM models -- Alpha and Beta. Both LLMs are instructed to ser
 
 At the end of all training war games, all key findings serve as contextual input for the instruction prompt for the Alpha model's next series -- the evaluation war games. This series the Alpha model starts with its lessons learned from the training series. The Beta model remains instructed as a tabula rasa.
 
-At the end of all evaluation war games, the results of this series is evaluated again. Did the training makes sense? Was Alpha able to improve its average result using the lessons learned?
+At the end of all evaluation war games, the results of this series are evaluated again. Did the training makes sense? Was Alpha able to improve its average result using the lessons learned?
 
 ## Installation
 
