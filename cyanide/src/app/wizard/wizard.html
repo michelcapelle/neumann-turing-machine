@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>⚔️ Generate War Game</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (step === 1) {
+        <div>
+            <h3>1️⃣ Add Actors</h3>
+            <mat-form-field appearance="fill">
+                <mat-label>Actor Name</mat-label>
+                <input matInput #actorInput placeholder="Add an actor" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addActor(actorInput.value); actorInput.value=''">Add</button>
+            <table mat-table [dataSource]="actors" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Actor Name </th>
+                    <td mat-cell *matCellDef="let actor"> {{ actor }} </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let actor; let i = index">
+                    @if (actors.length > 2) {
+                        <button mat-button color="warn" (click)="deleteActor(i)">Delete</button>
+                    }
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="['name', 'delete']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['name', 'delete'];"></tr>
+            </table>
+        </div>
+    } @else if (step === 2) {
+        <div>
+            <h3>2️⃣ Start</h3>
+            <p>Added {{ actors.length }} actor(s).</p>
+        </div>
+    }
+  </mat-card-content>
+  <mat-card-footer>
+    @if (step === 1) {
+        <div>
+            <button mat-raised-button color="accent" (click)="nextStep()">Next</button>
+        </div>
+    } @else if (step === 2) {
+        <div>
+            <button mat-button color="accent" (click)="previousStep()">Previous</button>
+            <button mat-raised-button color="success" (click)="submit()">Generate</button>
+        </div>
+    }
+  </mat-card-footer>
+</mat-card>

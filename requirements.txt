@@ -1,0 +1,10 @@
+Flask
+flask-swagger-ui
+pika
+pymongo
+tensorflow
+transformers
+hf_xet
+torch
+accelerate
+bitsandbytes

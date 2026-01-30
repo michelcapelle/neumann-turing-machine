@@ -1,0 +1,194 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "The Neumann-Turing Machine",
+    "description": "The Neumann-Turing Machine: An LLM approach to strategic game theory",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Health check endpoints"
+    },
+    {
+      "name": "Game",
+      "description": "Game management endpoints"
+    }
+  ],
+  "paths": {
+    "/api/v1/hello": {
+      "get": {
+        "summary": "Hello multipolar world",
+        "tags": ["Health"],
+        "description": "Returns a hello world message.",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/game": {
+      "post": {
+        "summary": "Generate game",
+        "tags": ["Game"],
+        "parameters": [
+          {
+            "name": "game",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "side_a": {
+                  "type": "string"
+                },
+                "side_b": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Game generated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "qa": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "actor": {
+                        "type": "string"
+                      },
+                      "answer": {
+                        "type": "string"
+                      },
+                      "prompt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "side_a": {
+                  "type": "string"
+                },
+                "side_b": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/game/{id}/turn": {
+      "post": {
+        "summary": "Perform next turn for game with specified ID",
+        "tags": ["Game"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the game to perform the next turn on"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Turn queued successfully",
+            "schema": {
+              "type": "string",
+              "description": "The ID of the game whose turn was queued"
+            }
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/api/v1/game/last/turn": {
+      "post": {
+        "summary": "Perform next turn for the last created game",
+        "tags": ["Game"],
+        "responses": {
+          "202": {
+            "description": "Turn queued successfully",
+            "schema": {
+              "type": "string",
+              "description": "The ID of the game whose turn was queued"
+            }
+          },
+          "404": {
+            "description": "No games found"
+          }
+        }
+      }
+    },
+    "/api/v1/game/{id}": {
+      "get": {
+        "summary": "Retrieve game by ID",
+        "description": "This endpoint retrieves a game from the database based on the provided ID",
+        "tags": ["Game"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the game to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Game successfully retrieved",
+            "schema": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "404": {
+            "description": "Game not found"
+          }
+        }
+      }
+    },
+    "/api/v1/game/last": {
+      "get": {
+        "summary": "Retrieve last created game",
+        "description": "This endpoint retrieves the last created game from the database",
+        "tags": ["Game"],
+        "responses": {
+          "200": {
+            "description": "Game successfully retrieved",
+            "schema": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "404": {
+            "description": "No games found"
+          }
+        }
+      }
+    }
+  }
+}
